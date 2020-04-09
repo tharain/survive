@@ -23,14 +23,11 @@ const { SubMenu } = Menu;
 const Sidebar = () => {
   const urlParams = new URLSearchParams(window.location.search);
   const note = urlParams.get("note");
-  const selectedKey =
-    window.location.pathname === "/notes"
-      ? [`/notes/${note}`]
-      : [window.location.pathname];
+  const selectedKey = [`/notes/${note}`];
   const globalConfigs = useSelector((state) => state.globalConfigs);
   const { theme } = globalConfigs;
   const [isCollapse, setIsCollapse] = useState<boolean>(false);
-  const openKey = [window.location.pathname];
+  const openKey = ["/notes"];
   return (
     <span className={styles[`global_sidebar_${theme}`]}>
       <Sider

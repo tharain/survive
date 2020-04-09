@@ -1,4 +1,4 @@
-import { Card, Col, Collapse, Divider, Row, Typography, Button } from "antd";
+import { Button, Card, Col, Collapse, Divider, Row, Typography } from "antd";
 import * as React from "react";
 import SyntaxHighlighter from "react-syntax-highlighter";
 import {
@@ -6,6 +6,7 @@ import {
   docco,
 } from "react-syntax-highlighter/dist/esm/styles/hljs";
 import BasicCard from "src/components/BasicCard";
+import Gap from "src/components/Gap";
 import { Theme } from "src/redux/reducers/globalConfigs";
 
 import Chapter1 from "./Chapter1";
@@ -26,11 +27,9 @@ const THEME = {
   dark: atomOneDark,
 };
 
-const Gap = () => <div className={styles.gap} />;
-
 const { Text, Paragraph, Title } = Typography;
 
-const ReduxSaga: React.FC<Props> = ({ theme = "light" }) => {
+const ReduxSaga: React.FC<Props> = ({ theme = "light" }: Props) => {
   const [jargons, setJargons] = useState<boolean>(false);
   return (
     <div className={styles.notes}>

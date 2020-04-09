@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Typography, Divider, Card, Row, Col } from "antd";
+import { Typography, Card } from "antd";
 import BasicCard from "src/components/BasicCard";
 import SyntaxHighlighter from "react-syntax-highlighter";
 import {
@@ -8,9 +8,8 @@ import {
 } from "react-syntax-highlighter/dist/esm/styles/hljs";
 import { Theme } from "src/redux/reducers/globalConfigs";
 import styles from "./index.less";
-import { Collapse } from "antd";
-
-const { Panel } = Collapse;
+import ExplainOptionals from "src/pages/Notes/components/ExplainOptionals";
+import { Chpt2Optionals } from "./Glossary";
 
 interface Props {
   theme?: Theme;
@@ -22,7 +21,7 @@ const THEME = {
 };
 const { Text, Paragraph, Title } = Typography;
 
-const Chapter2 = ({ theme }) => (
+const Chapter2: React.FC<Props> = ({ theme = "light" }: Props) => (
   <BasicCard theme={theme}>
     <Title level={3}>2 Basic Concept</Title>
     <Title level={4}>2.1 Putting it together</Title>
@@ -49,7 +48,7 @@ export function* fetchData(action) {
     <Card>
       <Paragraph type="warning" className={styles.wrapText}>
         * I was confused between effects <i>call</i> and <i>put</i>, and there
-        wasn't any article explaining online.
+        wasn&apos;t any article explaining online.
         <br />
         <br />
         Basically you use <b>call</b> when you want to trigger a function with
@@ -92,18 +91,7 @@ function* fetchAndCreateUsers() {
     yield takeEvery('CREATE_USER', createUser);
 }`}
     </SyntaxHighlighter>
-    <Collapse defaultActiveKey={["1"]}>
-      <Panel header="(Optional) Explanation of Effects used" key="1">
-        <Card
-          title="takeLatest(pattern, saga, ...args)"
-          style={{ whiteSpace: "pre-line", wordBreak: "break-word" }}
-        >
-          Basically the same as <b>takeEvery</b> except that only one Saga can
-          be run at any moment. If a previous Saga is still running, the
-          previous Saga will automatically be cancelled.
-        </Card>
-      </Panel>
-    </Collapse>
+    <ExplainOptionals optionals={Chpt2Optionals} />
     <Title level={4}>2.2 Error Handling</Title>
     <Paragraph type="secondary" className={styles.wrapText}>
       Instead of try / catch block like above, you can return a normal value

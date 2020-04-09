@@ -1,28 +1,27 @@
+import { Typography } from "antd";
 import * as React from "react";
-import { Typography, Divider, Card, Row, Col } from "antd";
-import BasicCard from "src/components/BasicCard";
 import SyntaxHighlighter from "react-syntax-highlighter";
 import {
-  docco,
   atomOneDark,
+  docco,
 } from "react-syntax-highlighter/dist/esm/styles/hljs";
+import BasicCard from "src/components/BasicCard";
+import ExplainOptionals from "src/pages/Notes/components/ExplainOptionals";
 import { Theme } from "src/redux/reducers/globalConfigs";
-import styles from "./index.less";
-import { Collapse } from "antd";
 
-const { Panel } = Collapse;
+import { Chpt1Optionals, Chpt1Optionals2 } from "./Glossary";
+import styles from "./index.less";
 
 interface Props {
   theme?: Theme;
 }
-
 const THEME = {
   light: docco,
   dark: atomOneDark,
 };
 const { Text, Paragraph, Title } = Typography;
 
-const Chapter1 = ({ theme }) => (
+const Chapter1: React.FC<Props> = ({ theme = "light" }: Props) => (
   <BasicCard theme={theme}>
     <Title level={3}>1 Introduction</Title>
     <Title level={4}>1.1 How to run Saga</Title>
@@ -44,6 +43,24 @@ import createSagaMiddleware from 'redux-saga';
 const sagaMiddleware = createSagaMiddleware();
 // 2. Connect the Saga middlware to the Redux store.
 const store = createStore(reducer, applyMiddleware(sagaMiddleware));`}
+    </SyntaxHighlighter>
+    <Paragraph type="secondary" className={styles.wrapText}>
+      As a responsible Software Engineer, if you code something you know you
+      need to debug your code eventually. There is a problem with the above code
+      as it does not connect to redux dev-tools, at least. You could fix it by:
+    </Paragraph>
+    <SyntaxHighlighter
+      language="react"
+      style={THEME[theme]}
+      showLineNumbers={true}
+    >
+      {`import { createStore, applyMiddleware } from 'redux';
+import { composeWithDevTools } from 'redux-devtools-extension';
+import createSagaMiddleware from 'redux-saga';
+
+const sagaMiddleware = createSagaMiddleware();
+// install redux-devtools-extension and you can now debug your code with ease.
+const store = createStore(reducer, composeWithDevTools(applyMiddleware(sagaMiddleware)));`}
     </SyntaxHighlighter>
     <Paragraph type="secondary" className={styles.wrapText}>
       To run a reducer, you can create a function and runs it like below:
@@ -128,47 +145,7 @@ export default function* rootSaga() {
       instructions for middleware. Saga will pause whenever an Effect is
       yielded.
     </Paragraph>
-    <Collapse defaultActiveKey={["1"]}>
-      <Panel header="(Optional) Explanation of Effects used" key="1">
-        <Row gutter={8}>
-          <Col flex="1 1">
-            <Card
-              title="put(action)"
-              style={{ whiteSpace: "pre-line", wordBreak: "break-word" }}
-            >
-              {`Schdules an action to the store's saga task queue.
-        
-By default: The code next line will be executed after yield put(action).
-Unless, if you have other Redux middleware with asynchronous flow that delay the propagation of the action.
-
-Downstream errors(ie. from the reducer) will be bubbled up.`}
-            </Card>
-          </Col>
-          <Col flex="1 1">
-            <Card
-              title="takeEvery(pattern, saga, ...args)"
-              style={{ whiteSpace: "pre-line", wordBreak: "break-word" }}
-            >
-              {`Spawns a saga on each action dispatched to the Store that matches pattern.
-
-o pattern: String | Array | Function - for more information see docs for take(pattern)
-
-o saga: a Generator function
-
-o args: Array<any> - arguments to be passed to the started task. takeEvery will add the incoming action to the argument list (i.e. the action will be the last argument provided to saga)`}
-            </Card>
-          </Col>
-        </Row>
-        <Card
-          title="all([...effects])"
-          style={{ whiteSpace: "pre-line", wordBreak: "break-word" }}
-        >
-          Creates an Effect description that instructs the middleware to run
-          multiple Effects in parallel and wait for all of them to complete.
-          It's quite the corresponding API to standard Promise.all
-        </Card>
-      </Panel>
-    </Collapse>
+    <ExplainOptionals optionals={Chpt1Optionals} />
     <Paragraph type="secondary" className={styles.wrapText}>
       Now to pass an array of asynchronous Sagas, you go back to main.js and add
       this line of code:
@@ -238,19 +215,7 @@ test('incrementAsync Saga test', (assert) => {
 })
 `}
     </SyntaxHighlighter>
-    <Collapse defaultActiveKey={["1"]}>
-      <Panel header="(Optional) Explanation of Effects used" key="1">
-        <Card
-          title="call(fn, ...args)"
-          style={{ whiteSpace: "pre-line", wordBreak: "break-word" }}
-        >
-          {`Creates an Effect description that instructs the middleware to call the function fn with args as arguments:
-
-o fn: a Generator function / normal function which returns a Promise or any value
-o args: any[]`}
-        </Card>
-      </Panel>
-    </Collapse>
+    <ExplainOptionals optionals={Chpt1Optionals2} />
   </BasicCard>
 );
 
