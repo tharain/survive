@@ -12,21 +12,12 @@ const THEME = {
 const Routes = () => {
   const globalConfigs = useSelector((state) => state.globalConfigs);
   const { theme } = globalConfigs;
+  const urlParams = new URLSearchParams(window.location.search);
+  const note = urlParams.get("note");
   return (
     <div>
       <link rel="stylesheet" type="text/css" href={THEME[theme]} />
-      <Switch>
-        <Route
-          exact
-          path="/notes"
-          component={(props) => {
-            const urlParams = new URLSearchParams(props.location.search);
-            const note = urlParams.get("note");
-            return <Notes note={note} />;
-          }}
-        />
-        <Route path="/" />
-      </Switch>
+      <Notes note={note} />
     </div>
   );
 };
