@@ -53,7 +53,7 @@ const Sidebar = () => {
             }
           >
             <Menu.Item key="/notes/reduxsaga">
-              <Link to="notes?note=reduxsaga">
+              <Link to="?note=reduxsaga">
                 <span>Redux-Saga</span>
               </Link>
             </Menu.Item>
