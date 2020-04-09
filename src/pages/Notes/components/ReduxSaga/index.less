@@ -1,0 +1,21 @@
+@import '~antd/dist/antd.less';
+
+.wrapText {
+  white-space: pre-line;
+  word-wrap: break-word;
+}
+
+.gap {
+  margin-top: 20px;
+}
+
+.notes {
+  :global(.ant-btn) {
+
+    &:focus,
+    &:hover {
+      border-color: @primary-color;
+      color: @primary-color;
+    }
+  }
+}
