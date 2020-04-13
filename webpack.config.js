@@ -106,7 +106,6 @@ const BASE_CONFIG = {
   ],
   watch: false,
   output: {
-    publicPath: "/",
     path: THIS_DIR.concat("build/"),
     filename: "[name].[contenthash].js",
   },
@@ -145,6 +144,7 @@ module.exports = (_, argv) => {
       devtool: "cheap-module-eval-source-map",
       output: {
         ...BASE_CONFIG.output,
+        publicPath: "/",
         filename: "[name].js",
       },
     };
