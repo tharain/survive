@@ -54,6 +54,11 @@ const Sidebar = () => {
                 <span>Redux-Saga</span>
               </Link>
             </Menu.Item>
+            <Menu.Item key="/notes/reactredux">
+              <Link to="?note=react-redux">
+                <span>Redux</span>
+              </Link>
+            </Menu.Item>
           </SubMenu>
         </Menu>
         {isCollapse ? (
