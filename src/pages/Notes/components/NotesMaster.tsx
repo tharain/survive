@@ -4,6 +4,7 @@ import styles from "./NotesMaster.less";
 
 import ReduxSaga from "./ReduxSaga";
 import ReactRedux from './ReactRedux';
+import Driving from './Driving';
 
 interface Props {
   note?: string | null;
@@ -16,6 +17,8 @@ const NotesMaster: React.FC<Props> = ({ note, theme = "light" }) => {
       return <ReduxSaga theme={theme} />;
     case 'react-redux':
       return <ReactRedux theme={theme} />
+    case 'driving':
+      return <Driving theme={theme} />
   }
   return null;
 };

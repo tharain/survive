@@ -59,6 +59,11 @@ const Sidebar = () => {
                 <span>Redux</span>
               </Link>
             </Menu.Item>
+            <Menu.Item key="/notes/driving">
+              <Link to="?note=driving">
+                <span>Driving</span>
+              </Link>
+            </Menu.Item>
           </SubMenu>
         </Menu>
         {isCollapse ? (
